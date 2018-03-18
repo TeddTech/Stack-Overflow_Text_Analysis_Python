@@ -1,45 +1,73 @@
-# SOresponse_Py
+# SOresponse_Py    
+
+[![Build Status](https://travis-ci.org/UBC-MDS/SOresponse_Py.svg?branch=master)](https://travis-ci.org/UBC-MDS/SOresponse_Py)       
 
 ### Contributors
 
 * Ted Thompson (@TeddTech)
 * Fang Yang (@fyang95)
-* Ying Dong (@yvonnedy)   
+* Ying Dong (@yvonnedy)      
+
+### To install package
+```
+pip install git+https://github.com/UBC-MDS/SOresponse_Py.git
+```
+
+### Example of usage in Python
+```
+from SOresponse_Py import *
+
+web_page('https://stackoverflow.com/questions/68645/static-class-variables-in-python?rq=1')
+popular('https://stackoverflow.com/questions/49218133/gulp-js-minifies-uglifies-and-copies-all-the-files-but-still-the-app-in-the-dis', 'likes')
+response_stats('https://stackoverflow.com/questions/49206233/how-can-i-convert-this-date-03-01-2018-1200-am-to-2018-03-01-in-c')
+```
+
+### To run tests   
+
+1. Clone repo
+2. Install pytest (`pip install -U pytest`)
+3. Navigate to root directory of `SOresponse_Py` (this is the repo you just cloned) and run `pytest`     
+
+### Package dependencies     
+`bs4`     
+`requests`    
+`numpy`    
+`lxml`
 
 ### Overview
 
-The `SOresponse` package is used for text analysis of Stack Overflow responses. There are both R and Python versions for this package. This package will include 3 functions: `web_page()` `popular()` `response_stats()`
+The `SOresponse` package is used for text analysis of Stack Overflow responses. There are both R and Python versions for this package. This package will include 3 functions: `web_page()` `popular()` `response_stats()`.
 
-* `web_page(url)`: Loads Stack Overflow response webpage.
+* `web_page(url)`: This function loads Stack Overflow response webpage and returns the title of question.
 
-	*Arguments:*
+	*Argument:*
 
-  `url` - Web adress of Stack Overflow response page. (Must enter exact URL)
+  `url` - A valid URL of a Stack Overflow webpage. Must be the type of String.
 
 	*Value:*
 
-  Returns the question being asked on the given Stack Overflow response webpage. If unsuccessful corisponding error will be returned.
+  Returns the question being asked on the given Stack Overflow response webpage. If unsuccessful corresponding error will be returned.     
 
-* `popular(url, type = 'likes')`: Returns most popular response on webpage.
-
-  *Arguments:*
-
-    `url` - An object that used the `web_page()` function.
-
-    `type` - "likes" returns response with the most likes. "author" returns response confirmed by author of question.
-
-  *Value:*
-
-    Returns a response. This will be of a character type.
-
-* `response_stats(url)`: Returns general statistics about question being asked on Stack Overflow page.
+* `popular(url, choice)`: This function returns an answer with the most likes or a author accepted answer on specified webpage.
 
   *Arguments:*
 
     `url` - An object that used the `web_page()` function.
 
+    `choice` - "likes" returns the response with the most likes; "author" returns the response accepted by the author.
+
   *Value:*
 
-    Returns a list of length 4 that includes number of responses, average reputation score, top reputation score, author reputation score
+    Returns an answer on the webpage in the type of String.
 
-Similar packages to SOresponseR are `Py-StackExchange` for python and `overflowr` for R. Py-StackExchange is well managed and has been kept up to date. `overflowr` has been abandon. There links respectively are https://github.com/lucjon/Py-StackExchange and https://meta.stackexchange.com/questions/174972/stackoverflow-api-for-r.
+* `response_stats(url)`: This function returns a list of statistics about the question being asked on a Stack Overflow page.
+
+  *Argument:*
+
+    `url` - An object that used the `web_page()` function.
+
+  *Value:*
+
+    Returns a dictionary of length 4 that includes number of responses, average reputation score, top reputation score and author's reputation score.
+
+Similar packages to `SOresponse` are `Py-StackExchange` for python and `overflowr` for R. `Py-StackExchange` is well managed and has been kept up to date. `overflowr` has been abandon. Their links respectively are https://github.com/lucjon/Py-StackExchange and https://meta.stackexchange.com/questions/174972/stackoverflow-api-for-r.
